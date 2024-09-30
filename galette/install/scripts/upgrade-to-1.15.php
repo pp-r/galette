@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright © 2003-2025 The Galette Team
+ * Copyright © 2003-2024 The Galette Team
  *
  * This file is part of Galette (https://galette.eu).
  *
@@ -21,18 +20,39 @@
 
 declare(strict_types=1);
 
+namespace Galette\Updates;
+
+use Analog\Analog;
+use Galette\DynamicFields\DynamicField;
+use Galette\Entity\ContributionsTypes;
+use Galette\Updater\AbstractUpdater;
+use GalettePaypal\Paypal;
+
 /**
- * External libraries versions
- * Defines various library versions, to avoid use of problematic symlinks under windows or via FTP.
+ * Galette 1.1.0 upgrade script
  *
  * @author Johan Cwiklinski <johan@x-tnd.be>
  */
+class UpgradeTo115 extends AbstractUpdater
+{
+    protected ?string $db_version = '1.15';
 
-define('GALETTE_PHP_MIN', '8.1');
-define('GALETTE_MYSQL_MIN', '5.7');
-define('GALETTE_MARIADB_MIN', '10.4');
-define('GALETTE_PGSQL_MIN', '11');
-define('GALETTE_NIGHTLY', false);
-define('GALETTE_VERSION', 'v1.1.5.1');
-define('GALETTE_COMPAT_VERSION', '1.1.0');
-define('GALETTE_DB_VERSION', '1.150');
+    /**
+     * Main constructor
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->setSqlScripts($this->db_version);
+    }
+
+    /**
+     * Update instructions
+     *
+     * @return boolean
+     */
+    protected function update(): bool
+    {
+        return true;
+    }
+}
