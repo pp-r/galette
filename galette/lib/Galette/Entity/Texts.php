@@ -431,7 +431,7 @@ class Texts
 
             $this->zdb->handleSequence(
                 self::TABLE,
-                    self::PK,
+                self::PK,
                 count($this->defaults)
             );
 
